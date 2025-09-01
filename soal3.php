@@ -5,12 +5,11 @@ $search_nama   = $_GET['nama']   ?? '';
 $search_alamat = $_GET['alamat'] ?? '';
 $search_hobi   = $_GET['hobi']   ?? '';
 
-// Escaping input
+
 $search_nama   = $koneksi->real_escape_string($search_nama);
 $search_alamat = $koneksi->real_escape_string($search_alamat);
 $search_hobi   = $koneksi->real_escape_string($search_hobi);
 
-// Query
 $sql = "SELECT person.nama, person.alamat, 
                GROUP_CONCAT(hobi.hobi SEPARATOR ', ') AS hobi
         FROM person 
@@ -30,7 +29,7 @@ if (!empty($search_hobi)) {
 $sql .= " GROUP BY person.id ORDER BY person.nama ASC";
 $result = $koneksi->query($sql);
 
-// ==== STYLE ====
+
 echo "<style>
     body { font-family: Arial, sans-serif; }
     table { border-collapse: collapse; margin: 20px 0; width: 600px; }
@@ -42,7 +41,6 @@ echo "<style>
     .form-box input[type=submit] { padding: 6px 20px; font-weight: bold; }
 </style>";
 
-// ==== TABEL ====
 echo "<table>
         <tr><th>Nama</th><th>Alamat</th><th>Hobi</th></tr>";
 
@@ -60,7 +58,7 @@ if ($result->num_rows > 0) {
 
 echo "</table>";
 
-// ==== FORM SEARCH ====
+
 echo "<div class='form-box'>
         <form method='GET'>
             <label>Nama :</label>
